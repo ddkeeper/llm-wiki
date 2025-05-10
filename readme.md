@@ -9,87 +9,74 @@
 
 # LLM Wiki
 
-> 这是一个专注于大语言模型（LLM）知识的综合性站点，基于 [Maximilian Labonne 的 LLM 课程](https://github.com/mlabonne/llm-course)构建和扩展。
+> LLM Wiki is a comprehensive site focused on Large Language Model (LLM) knowledge (more interesting things like multimodal model and generative AI in future), built upon and extended from [Maximilian Labonne's LLM course](https://github.com/mlabonne/llm-course).
 
-## 📚 内容概览
+## 📚 Content Overview
 
-本知识库包含三大核心板块：
+This knowledge base contains three core sections:
 
-### 🧩 LLM 基础知识
+### 🧩 LLM Fundamentals
 
-为初学者打造的基础知识模块，涵盖：
-- 数学基础
-- Python 编程基础
-- 神经网络基础
-- 自然语言处理基础
+A foundational module designed for beginners, covering:
+- Mathematical Foundations
+- Python Programming Basics
+- Neural Network Fundamentals
+- Natural Language Processing Basics
 
-### 🧑‍🔬 LLM 科学家
+### 🧑‍🔬 LLM Scientist
 
-专注于使用最新技术构建 LLM，包括：
-- LLM 架构
-- 模型预训练
-- 后训练数据集
-- 监督微调
-- 偏好对齐
-- 评估方法
-- 量化技术
-- 新趋势
+Focused on building LLMs with the latest technologies, including:
+- LLM Architecture
+- Model Pre-training
+- Post-training Datasets
+- Supervised Fine-tuning
+- ...
 
-### 👷 LLM 工程师
+### 👷 LLM Engineer
 
-关注 LLM 应用的生产实践，包括：
-- 运行 LLM
-- 构建向量存储
-- 检索增强生成（RAG）
-- 高级 RAG 技术
-- 推理优化
-- LLM 部署
-- LLM 安全
+Focused on production practices of LLM applications, including:
+- Running LLMs
+- Building Vector Storage
+- Retrieval-Augmented Generation (RAG)
+- Advanced RAG Techniques
+- ...
 
-## 🎯 学习资源
+## 🚀 Local Deployment
 
-每个主题都配备精心策划的学习资源：
-- 📚 推荐阅读材料
-- 🎥 视频教程
-- 💻 实践代码示例
-- 📝 练习题
-
-## 🚀 本地部署
-
-1. **克隆仓库**
+1. **Clone Repository**
 ```bash
 git clone https://github.com/ddkeeper/llm-wiki.git
 cd llm-wiki
 ```
 
-2. **安装依赖**
+2. **Install Dependencies**
 ```bash
 pip install markdown==3.7 markupsafe==3.0.2 mergedeep==1.3.4 mkdocs==1.6.1 mkdocs-get-deps==0.2.0 mkdocs-material==9.6.3 mkdocs-material-extensions==1.3.1 mkdocs-static-i18n==1.3.0
 ```
 
-3. **本地运行**
+3. **Run Locally**
 ```bash
 mkdocs serve
 ```
 
-4. **访问文档**
+4. **Access Documentation**
 
-打开浏览器访问 `http://127.0.0.1:8000`
+Open your browser and visit `http://127.0.0.1:8000`
 
-## 🤝 贡献指南
+## 🤝 Contributing
 
-我们欢迎各种形式的贡献：
-- 内容补充和改进
-- 错误修正
-- 新主题建议
-- 文档翻译
+We welcome various forms of contributions:
+- Content additions and improvements
+- Error corrections
+- New topic suggestions
+- Documentation translation
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
+This project is licensed under the MIT License.
 
 ---
 
 <div align="center">
-⭐ 如果这个项目对你有帮助，欢迎点个 Star！
+⭐ If this project helps you, please consider giving it a star!
 </div>
