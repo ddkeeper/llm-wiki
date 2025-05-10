@@ -1,0 +1,188 @@
+site_name: LLM Wiki
+site_description: 大语言模型学习基地
+use_directory_urls: false
+theme:
+    name: material
+    language: zh
+    logo: assets/images/logo.png
+    features:
+        - navigation.tabs
+        - navigation.sections
+        - navigation.expand
+        - search.highlight
+        - search.share
+        - content.tabs.link
+    palette:
+        - scheme: default
+          primary: brown
+          accent: brown
+          toggle:
+              icon: material/brightness-7
+              name: 切换至深色模式
+        - scheme: slate
+          primary: brown
+          accent: brown
+          toggle:
+              icon: material/brightness-4
+              name: 切换至浅色模式
+
+# 配置搜索语言
+search:
+    language: "zh,en"
+
+extra_css:
+    - assets/css/flickity.min.css
+    - assets/css/extra.css
+extra_javascript:
+    - assets/js/flickity.pkgd.min.js
+    - assets/mathjax/es5/tex-mml-chtml.js # 核心渲染文件
+
+markdown_extensions:
+    - pymdownx.highlight:
+          anchor_linenums: true
+          line_spans: __span
+          pygments_lang_class: true
+          use_pygments: true
+    - pymdownx.superfences
+    - pymdownx.inlinehilite
+    - pymdownx.snippets
+    - pymdownx.arithmatex:
+          generic: true
+    - pymdownx.mark # 启用文本高亮功能
+    - footnotes
+    - admonition # 启用提示块
+    - pymdownx.details # 启用可折叠功能
+    - attr_list
+    - md_in_html
+    - def_list
+    - pymdownx.tasklist:
+          custom_checkbox: true
+    - pymdownx.emoji:
+          emoji_index: !!python/name:materialx.emoji.twemoji
+          emoji_generator: !!python/name:materialx.emoji.to_svg
+    - toc:
+          permalink: true
+
+nav:
+    - 首页: index.md
+    - 🧩 基础知识:
+          - 基础知识总览: fundamentals/index.md
+          - 数学基础: #fundamentals/math/index.md
+                - 概述: fundamentals/math/index.md
+            #- 线性代数: fundamentals/math/linear_algebra/index.md
+            #- 微积分: fundamentals/math/calculus/index.md
+            #- 概率论: fundamentals/math/probability/index.md
+          - Python 编程: #fundamentals/python/index.md
+                - 概述: fundamentals/python/index.md
+            #- 基础语法: fundamentals/python/basics/index.md
+            #- 数据科学: fundamentals/python/data_science/index.md
+            #- 机器学习库: fundamentals/python/ml_libraries/index.md
+          - 神经网络: #fundamentals/neural_networks/index.md
+                - 概述: fundamentals/neural_networks/index.md
+          - 自然语言处理:
+                #- 概述: fundamentals/nlp/index.md
+                - 词向量基础: fundamentals/nlp/word_embeddings.md
+                - 特征提取: fundamentals/nlp/FET.md
+                - 长短期记忆单元: fundamentals/nlp/LSTMs.md
+                - 序列到序列模型: fundamentals/nlp/seq2seq.md
+                - 注意力机制: fundamentals/nlp/attention.md
+    - 🧑‍🔬 LLM 科学家:
+          - scientist/index.md
+          - 大模型架构:
+                - Transformer: scientist/architecture/transformer.md
+                #- scientist/architecture/index.md
+                - scientist/architecture/overview.md
+                - scientist/architecture/tokenization.md
+                - scientist/architecture/attention.md
+                - scientist/architecture/sampling.md
+          - 预训练:
+                - scientist/pretraining/index.md
+                - scientist/pretraining/data_preparation.md
+                - scientist/pretraining/distributed_training.md
+                - scientist/pretraining/optimization.md
+                - scientist/pretraining/monitoring.md
+          - 后训练数据集:
+                - scientist/datasets/index.md
+                - scientist/datasets/storage.md
+                - scientist/datasets/synthetic_data.md
+                - scientist/datasets/enhancement.md
+                - scientist/datasets/filtering.md
+          - 监督微调:
+                - scientist/finetuning/index.md
+                - scientist/finetuning/techniques.md
+                - scientist/finetuning/parameters.md
+                - scientist/finetuning/distributed.md
+                - scientist/finetuning/monitoring.md
+          - 偏好对齐:
+                - scientist/alignment/index.md
+                - scientist/alignment/sampling.md
+                - scientist/alignment/dpo.md
+                - scientist/alignment/ppo.md
+                - scientist/alignment/monitoring.md
+          - 评估:
+                - scientist/evaluation/index.md
+                - scientist/evaluation/benchmarks.md
+                - scientist/evaluation/human.md
+                - scientist/evaluation/model_based.md
+          - 量化:
+                - scientist/quantization/index.md
+                - scientist/quantization/techniques.md
+                - scientist/quantization/gguf.md
+                - scientist/quantization/gptq.md
+          - 新趋势:
+                - scientist/trends/index.md
+                - scientist/trends/merging.md
+                - scientist/trends/multimodal.md
+                - scientist/trends/interpretability.md
+    - 👷 LLM 工程师:
+          - engineer/index.md
+          - 运行 LLMs:
+                - engineer/running/index.md
+                - engineer/running/apis.md
+                - engineer/running/open_source.md
+                - engineer/running/prompting.md
+          - 向量存储:
+                - engineer/vector_storage/index.md
+                - engineer/vector_storage/ingestion.md
+                - engineer/vector_storage/splitting.md
+                - engineer/vector_storage/embeddings.md
+                - engineer/vector_storage/databases.md
+          - RAG系统:
+                - engineer/rag/index.md
+                - engineer/rag/orchestrators.md
+                - engineer/rag/retrievers.md
+                - engineer/rag/memory.md
+                - engineer/rag/evaluation.md
+          - 高级RAG:
+                - engineer/advanced_rag/index.md
+                - engineer/advanced_rag/query.md
+                - engineer/advanced_rag/agents.md
+                - engineer/advanced_rag/processing.md
+          - 推理优化:
+                - engineer/inference/index.md
+                - engineer/inference/flash_attention.md
+                - engineer/inference/kv_cache.md
+                - engineer/inference/speculative.md
+          - 部署:
+                - engineer/deployment/index.md
+                - engineer/deployment/local.md
+                - engineer/deployment/demo.md
+                - engineer/deployment/server.md
+                - engineer/deployment/edge.md
+          - 安全:
+                - engineer/security/index.md
+                - engineer/security/prompt_hacking.md
+                - engineer/security/backdoors.md
+                - engineer/security/defense.md
+
+plugins:
+    - i18n:
+          docs_structure: suffix
+          languages:
+              - locale: zh
+                default: true
+                name: 中文
+                build: true
+              - locale: en
+                name: English
+                build: true

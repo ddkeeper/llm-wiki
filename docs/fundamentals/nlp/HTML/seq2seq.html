@@ -1,0 +1,164 @@
+
+    <div id="seq2seq_simple_rnn">
+        <h2>The Simplest Model: Two RNNs for Encoder and Decoder</h2>
+
+
+            <img src="../resources/lectures/seq2seq/general/enc_dec_simple_rnn-min.png"
+             style="max-width:100%; margin-bottom:20px;"/>
+
+        <p>The simplest encoder-decoder model consists of two RNNs (LSTMs): one for the encoder
+            and another for the decoder. Encoder RNN reads the source sentence, and the final state
+            is used as the initial state of the decoder RNN. The hope is that the final encoder state
+            "encodes" all information about the source, and the decoder can generate the target sentence
+            based on this vector.
+        </p>
+
+        <p>This model can have different modifications: for example, the encoder and decoder can have several layers.
+            Such a model with several layers was used, for example, in the paper
+            <a href="https://arxiv.org/pdf/1409.3215.pdf" target="_blank">Sequence to Sequence Learning with Neural Networks</a> -
+            one of the first attempts to solve sequence-to-sequence tasks using neural networks.
+        </p>
+
+        <p>In the same paper, the authors looked at the last encoder state and visualized several examples - look below.
+            Interestingly, representations of
+            sentences with similar meaning but different structure are close!
+        </p>
+
+
+        <p style="text-align: center; display: block;
+            margin-bottom:20px; max-width:100%;">
+           <img src="../resources/lectures/seq2seq/general/rnn_simple_examples-min.png"
+             style="max-width:100%; margin-bottom:20px;"/>
+                <br />
+            <span style="font-size: small;">The examples are from the paper
+            <a href="https://arxiv.org/pdf/1409.3215.pdf"
+               target="_blank">Sequence to Sequence Learning with Neural Networks</a>.</span>
+            </p>
+
+
+    <div class="card_with_ico">
+    <img class="ico" src="../resources/lectures/ico/bulb_empty.png"/>
+    <div class="text_box_yellow">
+    <p class="data_text">
+        The paper <a href="https://arxiv.org/pdf/1409.3215.pdf" target="_blank">Sequence to
+        Sequence Learning with Neural Networks</a>
+        introduced an elegant trick to make such a simple LSTM model work better.
+
+        Learn more in <a href="#research_reverse_order_in_lstm">this exercise</a>
+        in the <a href="#research_thinking">Research Thinking</a> section. </p>
+    </div>
+    </div>
+
+    </div>
+
+
+    <div id="seq2seq_training">
+        <h2>Training: The Cross-Entropy Loss (Once Again)</h2>
+
+        <p class="data_text"><font color="#888"><u>Lena</u>:
+        This is the same cross-entropy loss we discussed before in the
+            <a href="./text_classification.html" target="_blank">Text Classification</a>
+            and in the <a href="./language_modeling.html" target="_blank">Language Modeling</a> lectures -
+            you can skip this part or go through it quite easily :)
+        </font>
+        </p>
+
+         <p>Similarly to neural LMs, neural seq2seq models are trained to predict probability distributions
+            of the next token given previous context (source and previous target tokens).
+            Intuitively, at each step we maximize the probability a model assigns to the correct token.</p>
+        <p>
+            Formally, let's assume we have a training instance with the source
+            \(x=(x_1, \dots, x_m)\) and the target \(y=(y_1, \dots, y_n)\).
+            Then at the timestep \(t\), a model predicts a probability distribution
+            \(p^{(t)} = p(\ast|y_1, \dots, y_{t-1}, x_1, \dots, x_m)\).
+
+            The target at this step is \(p^{\ast}=\mbox{one-hot}(y_t)\), i.e.,
+            we want a model to assign probability 1 to the correct token, \(y_t\), and zero to the rest.
+        </p>
+
+        <p>The standard loss function is the <font face="arial">cross-entropy loss</font>.
+        Cross-entropy loss for the target distribution \(p^{\ast}\) and the predicted distribution \(p^{}\)
+        is
+            \[Loss(p^{\ast}, p^{})= - p^{\ast} \log(p) = -\sum\limits_{i=1}^{|V|}p_i^{\ast} \log(p_i).\]
+            Since only one of \(p_i^{\ast}\) is non-zero (for the correct token \(y_t\)), we will get
+            \[Loss(p^{\ast}, p) = -\log(p_{y_t})=-\log(p(y_t| y_{\mbox{<}t}, x)).\]
+            At each step, we maximize the probability a model assigns to the correct token.
+            Look at the illustration for a single timestep.</p>
+
+        <center>
+        <img src="../resources/lectures/seq2seq/general/one_step_loss_intuition-min.png"
+             style="max-width:100%; margin:20px;"/>
+        </center>
+
+        <p>For the whole example, the loss will be \(-\sum\limits_{t=1}^n\log(p(y_t| y_{\mbox{<}t}, x))\).
+            Look at the illustration of the training process (the illustration is for the RNN model, but
+            the model can be different).
+        </p>
+
+        <center>
+         <video width="100%" height="auto" loop autoplay muted style="margin-left: 20px;">
+             <source src="../resources/lectures/seq2seq/general/seq2seq_training_with_target.mp4" type="video/mp4">
+         </video>
+        <center>
+
+
+    </div>
+
+    <br><br>
+
+    <div id="seq2seq_inference">
+        <h2>Inference: Greedy Decoding and Beam Search</h2>
+
+        <p>Now when we understand how a model can look like and how to train this model, let's
+        think how to generate a translation using this model. We model the probability of a sentence as follows:
+        </p>
+        <img src="../resources/lectures/seq2seq/general/inference_formula-min.png"
+             style="max-width:80%; margin:20px;"/>
+        <p>Now the main question is: how to find the argmax?</p>
+
+        <p>Note that <font face="arial">we can not find the exact solution.</font> The total number of
+            hypotheses we need to check is \(|V|^n\), which is not feasible in practice. Therefore, we will find
+            an approximate solution.
+        </p>
+        <p><font class="data_text" color="#888"><u>Lena</u>: In reality, the exact solution
+            is usually worse than the approximate ones we will be using.
+        </font></p>
+
+
+        <h3><span style="margin-right:15px;font-size:14px;">&#8226;</span>
+                <font face="arial">Greedy Decoding: </font>At each step, pick the most probable token</h3>
+
+        <p>The straightforward decoding strategy is greedy - at each step, generate a token with the highest probability.
+            This can be a good baseline, but this method is inherently flawed:
+            the best token at the current step does not necessarily lead to the best sequence.
+        </p>
+        <img src="../resources/lectures/seq2seq/general/greedy_is_bad-min.png"
+             style="max-width:60%; margin:20px;"/>
+
+
+
+        <h3><span style="margin-right:15px;font-size:14px;">&#8226;</span>
+                <font face="arial">Beam Search: </font> Keep track of several most probably hypotheses</h3>
+        <p>Instead, let's keep several hypotheses. At each step, we will be continuing each of the
+        current hypotheses and pick top-N of them. This is called <font face="arial">beam search</font>.
+        </p>
+        <center>
+         <video width="80%" height="auto" loop autoplay muted style="margin-left: 20px;">
+             <source src="../resources/lectures/seq2seq/general/beam_search.mp4" type="video/mp4">
+         </video>
+        <center>
+
+
+            <p>Usually, the beam size is 4-10. Increasing beam size is computationally inefficient
+            and, what is more important, leads to worse quality.
+            </p>
+
+
+    </div>
+
+
+
+
+
+
+</div>

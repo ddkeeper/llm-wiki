@@ -1,0 +1,113 @@
+下一步工作
+整理和编写各个章节的内容
+运行资源下载脚本获取离线资源
+完善导航结构
+添加更多功能性配置（如评论系统、数学公式支持等）
+
+
+很好；现在先基于readme文件里面的内容帮我编写一下网站主页的内容，说明一下这个网站是关于什么知识的，知识点结构大概怎样的，这些内容的答案都可以在readme文件里找到；注意把文字对应的图标也包含进去
+
+不管了；现在我将对LLM基础知识板块的内容进行展开，先看LLM基础知识里的数学基础；请参考@https://github.com/mlabonne/llm-course/tree/main 给出有关这一部分的介绍以及学习资源，给出展开后的多个子主题的内容
+
+
+词嵌入（Word Embeddings）是机器学习模型理解文本数据的基础。与人类直接理解
+文本不同，模型需要将文本转换为向量形式才能处理。例如，我们可以轻松理解"我
+看见一只猫"这句话，但模型需要将其转换为特征向量才能进行处理。这些向量就是
+词嵌入，它们是词语的数值表示，可以输入到模型中进行训练。
+
+
+![word_repr_intro](./images/word_repr_intro-min.png)
+
+机器学习模型"看到"数据的方式与我们人类不同。例如,我们可以轻松理解文本"I saw a cat",但我们的模型不能 - 它们需要特征向量。这些向量,或称为词嵌入,是可以输入到模型中的词的表示。
+
+
+
+文本样式：
+1.中文与英文之间需要用空格隔开
+2.括号与前后字符需要用空格隔开
+3.前一句与后一句需要用空格隔开
+"./images/tezguino1-min.png"
+
+
+Let us remember our main idea again
+GloVe: Global Vectors for Word Representation
+
+
+git clone https://gitcode.com/gh_mirrors/gi/github-mathjax.git
+
+# 下载到 assets 目录
+git clone https://gitcode.com/gh_mirrors/ma/MathJax.git docs/assets/mathjax
+
+https://mirrors.tuna.tsinghua.edu.cn
+# 或者用 npm 方式
+npm install mathjax
+cp -r node_modules/mathjax docs/assets/
+t =1, \dots, T
+
+继续，我帮你筛选出了html源代码中关于Word2Vec那一部分的内容；请基于这一部分内容给出对应的md格式的源码，主要就是把英文翻译成中文，并添加合适的标点符号；语法层面能转换的尽量转换成md格式，不好转换的保留html格式，比如幻灯片轮播部分的html代码；元素名字与源码保持一致，路径请参考md文件中的相应部分
+
+还是同样的要求，参考html页面里面的内容给出md文件；注意文件路径的修改需要与md文件的其他部分保持一致
+
+
+
+
+
+#html转md提示词
+基于这部分内容，为我生成transformer.md页面内的相应中文内容；在撰写的过程中需要注意：
+1、英文翻译成中文，不要漏标点符号，特别是分点叙述时；同时，注意英文与两边中文之间要有空格，标点符号要与左右有空格；
+2.尽可能使用md标准语法以及Mkdocs Material提供的扩展语法，只有碰见md没法实现的再保留html语法；
+3.图片类型的资源元素均已被下载到本地，他们所在的目录dir均为./images/transformer/，因此，实际路径为dir+资源元素名。
+
+继续转换，记得保持原文内容的完整性；不要漏内容
+
+#英文版md内容生成
+基于原始html形式英文内容与中文版的md内容，遵循中文版md的结构给出英文版的md内容；要求：
+1.md里面的图片元素地址和相应语法均保持不变
+2.表述尽量以英文原版为准，因为在翻译中文文档时做了一下润色，直接照翻可能会不符合原版的内容；
+3.标点符号不要遗漏，要注意数字与前后字符间的间隔
+英文版文件名为index.en.md
+
+
+同样的要求，基于原始英文材料，遵循前面的结构同时给出中文版和英文版的数学基础部分的md内容；要求：
+1.md里面的图片元素地址和相应语法均保持不变
+2.表述尽量以英文原版为准，因为在翻译中文文档时做了一下润色，直接照翻可能会不符合原版的内容；
+3.标点符号不要遗漏，要注意英文，数字与前后字符间的间隔
+中文版文件名为index.zh.md，英文版文件名为index.en.md
+
+
+布局容器：使用 <div> 容器，通过 class="grid cards" 定义卡片布局。
+卡片结构：
+图标：通过 <span> 标签插入并设置大小。
+标题：使用 Markdown 加粗语法 **标题**，并添加自定义样式类。
+按钮：使用 Markdown 链接语法 [按钮文本](链接地址){ .md-button }。
+未完待续：最后一个卡片以纯文本提示，无链接。
+样式与交互：通过 CSS 类控制样式，点击按钮实现模块导航。
+
+
+容器配置：使用 class="carousel" 和 data-flickity 属性初始化轮播，并设置样式。
+轮播单元：每个单元用 <div class="carousel-cell"> 包裹图片，设置宽度为 100%。
+图片加载：通过 data-flickity 配置项（如 imagesLoaded）确保图片加载后初始化轮播。
+
+
+项目启动：
+使用 django-admin startproject projectname 创建一个新的 Django 项目。
+应用开发：
+使用 python manage.py startapp appname 创建一个应用。
+在应用目录中，定义模型（models.py）、视图（views.py）、URL 路由（urls.py）和模板（templates）。
+模型定义与数据库操作：
+在 models.py 中定义数据模型，Django 会自动将模型映射为数据库表。
+使用 Django 的 ORM（对象关系映射）进行数据库操作，无需手动编写 SQL。
+URL 路由配置：
+在 urls.py 中定义 URL 模式，通过正则表达式匹配请求路径，并将其映射到视图函数。
+视图逻辑与模板渲染：
+在 views.py 中定义视图函数，处理请求并返回响应。
+使用 Django 的模板系统（templates）渲染 HTML 页面，实现动态内容展示。
+模板设计：
+在 templates 文件夹中创建 HTML 模板文件。
+使用 Django 模板语言（如变量、标签、继承等）实现动态内容渲染。
+
+
+
+
+这个幻灯片轮播效果是使用 Flickity 库实现的。代码中首先通过 link 和 script 标签引入了 Flickity 的 CSS 和 JavaScript 文件。然后创建了一个带有 carousel 类的 div 容器，并通过 data-flickity 属性配置了轮播的参数，包括图片加载设置(imagesLoaded)、百分比定位(percentPosition)、选中项吸引力(selectedAttraction)和摩擦力(friction)。容器内部包含多个 carousel-cell 类的 div，每个 div 中放置一张图片，形成了一个可以左右滑动的图片轮播效果。
+
